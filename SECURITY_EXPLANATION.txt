@@ -1,0 +1,22 @@
+This file explains the security measures in place for managing sensitive data in this project. It focuses on the usage of .env files, the .gitignore file, and what we are pushing to the repository to ensure secure and efficient collaboration.
+1 – .env File
+The .env stores sensitive data such as database credentials and application settings. By placing these values in an .env, we ensure that they remain local to the development environment and are not hardcoded into the application and committed to version control. 
+The .env file allows us to keep sensitive information secure and private, as well as simplifying the management of environment-specific settings, such as production. Lastly, it prevents accidental sharing of sensitive data when the repository is cloned. 
+2 – .gitignore File
+The .gitignore file is imported for preventing sensitive or unnecessary files from being committed to the repository. It specifies which files and directories Git should ignore.
+It prevents sensitive files, such as .env from being included in the repository and reduces the risk of accidental exposure of credentials and environment-specific configurations. Additionally, it ensures the repository remains clean and focused only on essential project files.
+In this project, the. gitignore file contains variables like this:
+.env
+ 
+3 – What we are pushing
+The files and directories intentionally pushed to the repository include:
+-          	app.py
+-          	Dockerfile
+-          	requirements.txt
+-          	docker-compose.yml (excluding sensitive information via .env)
+-          	NETWORK_EXPLAINATION.txt
+-          	SECURITY_EXPLANATION.txt
+-          	TROUBLESHOOTING .md
+-          	GROUP_REPORT.md
+-          	README.md
+
