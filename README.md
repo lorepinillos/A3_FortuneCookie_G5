@@ -1,4 +1,3 @@
-README.md
 Fortune Cookie App
 This app is a flask-based web application that gives randomized motivational messages to users. The app is containerized with Docker and includes a PostgreSQL database for storing messages.
  
@@ -13,26 +12,35 @@ Pre-requisites
 -          	Docker and Docker Compose
  
 1. 	Clone the repository:
-git clone: git@github.com:lorepinillos/A3_FortuneCookie_G5.git
+git clone: git@github.com:lorepinillos/A3_FortuneCookie_G5.git-
 cd A3_FortuenCookie_G5
+
+
 2.    	Set up the environment variables:
 -          	Create a .env file in the root directory with the following content format:
 
 DATABASE_USER = xxx
 DATABASE_PASSWORD=xxx
 DATABASE_NAME=xxx
- 
-3. 	Build and start the containers:
+
+3. Create a deploy key 
+ssh-keygen -t rsa -b 4096 -C "deploy_key" -f deploy_key
+cat deploy_key.pub - copy and paste the output in the Github web - settings - SSH and GPG keys - create a new SSH key - paste 
+
+4. 	Build and start the containers:
 docker-compose up --build -d
  
-4. 	Test the app
+5. 	Test the app
 -          	Access the app in your browser at http://localhost:5326
 -          	Use curl to test endpoints: 
 curl http://localhost:5326
-
+ 
  
 Security Practices
 -          	Sensitive information is stored in a .env file and excluded from version control using .gitignore.
  
 Troubleshooting
 -          	Check the TROUBLESHOOTING.md for solutions
+
+
+
