@@ -4,14 +4,27 @@ FROM python:3.9 AS development
 # Set working directory
 WORKDIR /app
 
+# Install necessary tools
+RUN apt-get update && apt-get install -y git openssh-client libssl-dev
+
+# Copy the SSH deploy key into the container securely
+COPY deploy_key /root/.ssh/id_rsa
+RUN chmod 600 /root/.ssh/id_rsa
+
+# Add GitHub to known_hosts to avoid SSH prompt
+RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
+
+# Clone the private repository
+RUN git clone git@github.com:lorepinillos/A3_FortuneCookie_G5.git .
+
+# Remove the SSH key for security
+RUN rm -rf /root/.ssh
+
 # Copy only requirements to install dependencies (cache optimization)
 COPY requirements.txt .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the application files, including templates
-COPY . .
 
 # Expose Flask development port
 EXPOSE 5000
