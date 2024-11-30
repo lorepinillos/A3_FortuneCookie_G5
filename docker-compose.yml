@@ -1,0 +1,29 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5326:5000"  # Map external port 5060 to internal port 5000
+    environment:
+      - FLASK_ENV=development
+      - DATABASE_URL=postgresql://user:12345@db:5432/messages_db
+    depends_on:
+      - db
+    networks:
+      - my_custom_network_FC
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    ports:
+      - "5132:5432"  # Map PostgreSQL default port
+    networks:
+      - my_custom_network_FC
+
+networks:
+  my_custom_network_FC:
+    driver: bridge
