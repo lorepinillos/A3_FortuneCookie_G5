@@ -1,0 +1,18 @@
+In our docker-compose.yml we do not explicitly define our subnet, 
+but rather make our custom network my_custom_network_FC use the default Docker bridge driver. 
+Because of this, Docker defaults to a private IP range like 172.17.0.0/16. 
+In this case, this means that first 16 bits are the basenumber of our network : 
+all containers in this network will always start with 172.17.0.0 
+This address is not used as it is the base IP address of the network. 
+Our gateway will be assigned 172.17.0.1, which is what we use for communicating with outside services. 
+The highest number we can use is the one of our broadcast address 172.17.255.255, 
+this is the one that network uses for specific function: connect all networks at same time. 
+In conclusion, our IP ranges with first value 172.17.0.2 and last 172.17.255.254.
+
+Should the subnet we use overlap with the host system’s network or with another Docker network, 
+this could cause IP address conflicts, which would prevent containers from properly communicating 
+with each other or with external resources.
+
+Docker uses an internal DNS system to allow containers to refer to each other by their service name instead of IP addresses. 
+This means that containers can use names (such as db or web, specified in the docker-compose.yml) 
+and that Docker will resolve those names with the correct IP within the network.
